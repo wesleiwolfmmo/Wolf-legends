@@ -48,3 +48,67 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Wolf Legends RPG</title>
+    <style>
+        body { background: #1a1a1a; color: #FFD700; text-align: center; font-family: 'Arial', sans-serif; padding: 20px; }
+        #game-container { border: 3px solid #800080; padding: 20px; border-radius: 15px; display: inline-block; background: #000; width: 90%; max-width: 500px; }
+        button { background: #800080; color: white; border: none; padding: 12px 20px; margin: 8px; cursor: pointer; border-radius: 8px; font-weight: bold; }
+        input { padding: 10px; margin: 10px; border-radius: 5px; border: 1px solid #555; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <div id="menu-inicial">
+        <h1>Wolf Legends RPG</h1>
+        <input type="text" id="nome" placeholder="Digite seu nome"><br>
+        <h3>Escolha seu Guardião:</h3>
+        <button onclick="selecionar('Anjo')">Anjo</button>
+        <button onclick="selecionar('Demônio')">Demônio</button>
+        <div id="genero-area" class="hidden">
+            <h3>Gênero:</h3>
+            <button onclick="finalizar('Gay')">🏳️‍🌈 Gay</button>
+        </div>
+    </div>
+
+    <div id="status-jogo" class="hidden">
+        <h2>Status do Herói</h2>
+        <p id="info-jogador"></p>
+        <hr style="border: 1px solid #800080;">
+        <button onclick="irParaMapa()">Iniciar Aventura</button>
+    </div>
+</div>
+
+<script>
+    let jogador = { nome: "", guardiao: "", genero: "", nivel: 1000, ouro: 999999, diamante: 999999 };
+
+    function selecionar(guardiao) {
+        jogador.nome = document.getElementById('nome').value || "Lobo";
+        jogador.guardiao = guardiao;
+        document.getElementById('genero-area').classList.remove('hidden');
+    }
+
+    function finalizar(genero) {
+        jogador.genero = genero;
+        document.getElementById('menu-inicial').classList.add('hidden');
+        document.getElementById('status-jogo').classList.remove('hidden');
+        document.getElementById('info-jogador').innerHTML = `
+            Nome: ${jogador.nome} <br>
+            Guardião: ${jogador.guardiao} <br>
+            Nível: ${jogador.nivel} <br>
+            Ouro: ${jogador.ouro} | Diamantes: ${jogador.diamante}
+        `;
+    }
+
+    function irParaMapa() {
+        alert("Bem-vindo ao mundo de Wolf Legends! Sua jornada começa agora.");
+    }
+</script>
+
+</body>
+</html>
