@@ -2,15 +2,16 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Wolf Legends Online - Estúdio</title>
+    <title>Wolf Legends Online - Setup</title>
     <style>
         :root { --dark: #020617; --gold: #FFD700; --purple: #800080; }
-        body { background-color: var(--dark); color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .box { border: 2px solid var(--purple); padding: 25px; border-radius: 15px; width: 90%; max-width: 450px; background: rgba(0,0,0,0.9); text-align: center; }
-        button { background: var(--purple); color: white; border: 1px solid var(--gold); padding: 15px; margin: 8px 0; cursor: pointer; border-radius: 8px; width: 100%; font-weight: bold; }
-        .back-btn { background: #333; border: none; padding: 8px; width: 60px; font-size: 12px; }
-        h1 { color: var(--gold); }
-        .tag { background: gold; color: black; padding: 2px 5px; border-radius: 3px; font-size: 12px; }
+        body { background: radial-gradient(circle, #1a0033, #000); color: white; font-family: 'Cinzel', sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .box { border: 2px solid var(--purple); padding: 30px; background: rgba(0,0,0,0.9); border-radius: 20px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 0 15px purple; }
+        h1 { color: var(--gold); text-shadow: 0 0 10px purple; }
+        button { background: linear-gradient(to bottom, #800080, #2a004a); color: white; border: 1px solid var(--gold); padding: 15px; margin: 8px 0; cursor: pointer; border-radius: 8px; width: 100%; font-weight: bold; }
+        .back-btn { background: #333; width: 60px; padding: 5px; font-size: 10px; }
+        input { padding: 12px; width: 90%; background: #111; color: var(--gold); border: 1px solid var(--purple); border-radius: 5px; margin-bottom: 20px; }
+        .stats-bar { color: var(--gold); font-size: 14px; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -18,13 +19,8 @@
 <div id="app" class="box"></div>
 
 <script>
-    // 1. Módulo: Configuração do Jogador (Modo Deus)
-    let player = JSON.parse(localStorage.getItem('WolfSave')) || {
-        nome: "", classe: "", sexo: "", alinhamento: "", tagGay: false,
-        nivel: 1000, poder: 999999999, ouro: "Infinito", diamantes: "Infinito"
-    };
-
-    let history = []; // Pilha para o botão voltar
+    let player = { nome: "", classe: "", sexo: "", guardiao: "", nivel: 1000, vida: 100, mana: 100 };
+    let history = [];
 
     function render(html, saveHistory = true) {
         if(saveHistory) history.push(app.innerHTML);
@@ -32,51 +28,51 @@
     }
 
     function voltar() { if(history.length > 0) document.getElementById('app').innerHTML = history.pop(); }
-    
-    function playVoice(texto, personagem) { console.log(`[Áudio]: ${personagem} - ${texto}`); }
 
-    // 2. Módulos de Fluxo
     function iniciar() {
         render(`
-            <h1>Wolf Legends</h1>
-            <p>O mundo está sob o domínio de tiranos que criam o caos para serem adorados. O trono é um dreno de energia. Evolua até o nível 1000, desafie o Deus atual e decida o destino: Liberdade ou Tirania.</p>
-            <button onclick="telaCriacao()">Continuar</button>
-        `, false);
-    }
-
-    function telaCriacao() {
-        render(`
-            <button class="back-btn" onclick="voltar()">Voltar</button>
-            <input type="text" id="nomeInput" placeholder="Nome do Herói" style="padding:10px; width:90%">
-            <h3>Classe:</h3>
+            <h1>WOLF LEGENDS</h1>
+            <input type="text" id="nome" placeholder="Nome do Herói">
+            <h3>Escolha sua Classe:</h3>
             <button onclick="definir('classe', 'Guerreiro')">Guerreiro</button>
             <button onclick="definir('classe', 'Mago')">Mago</button>
             <button onclick="definir('classe', 'Arqueiro')">Arqueiro</button>
-            <h3>Orientação:</h3>
-            <button onclick="definir('sexo', 'Gay')">Gay <span class="tag">🏳️‍🌈</span></button>
-            <button onclick="definir('sexo', 'Masculino')">Masculino</button>
-            <button onclick="definir('sexo', 'Feminino')">Feminino</button>
-        `);
+        `, false);
     }
 
     function definir(key, val) {
-        player[key] = val;
-        if(key === 'sexo' && val === 'Gay') player.tagGay = true;
-        player.nome = document.getElementById('nomeInput').value || "Lobo";
-        hub();
+        if(key === 'classe') {
+            player.nome = document.getElementById('nome').value || "Lobo";
+            player.classe = val;
+            render(`
+                <button class="back-btn" onclick="voltar()">VOLTAR</button>
+                <h3>Gênero:</h3>
+                <button onclick="definir('sexo', 'Masculino')">Masculino</button>
+                <button onclick="definir('sexo', 'Feminino')">Feminino</button>
+                <button onclick="definir('sexo', 'Gay 🏳️‍🌈')">Gay 🏳️‍🌈</button>
+            `);
+        } else if(key === 'sexo') {
+            player.sexo = val;
+            render(`
+                <button class="back-btn" onclick="voltar()">VOLTAR</button>
+                <h3>Escolha seu Guardião:</h3>
+                <button onclick="finalizar('Anjo')">Anjo (Luz)</button>
+                <button onclick="finalizar('Demônio')">Demônio (Sombras)</button>
+            `);
+        }
     }
 
-    function hub() {
-        localStorage.setItem('WolfSave', JSON.stringify(player));
-        playVoice("Bem-vindo ao Hub.", "Sistema");
+    function finalizar(g) {
+        player.guardiao = g;
         render(`
-            <h2>Hub de Comando</h2>
-            <p>Herói: ${player.nome} (${player.classe})</p>
-            <p>Nível: ${player.nivel} | Poder: ${player.poder}</p>
-            <p>Ouro/Dia: ${player.ouro} / ${player.diamantes}</p>
-            ${player.tagGay ? '<p><span class="tag">🏳️‍🌈 Tag de Identidade Ativa</span></p>' : ''}
-            <button onclick="location.reload()">Resetar Save</button>
-        `, false);
+            <h2>STATUS INICIAL</h2>
+            <div class="stats-bar">
+                <p>Nome: ${player.nome} | Classe: ${player.classe}</p>
+                <p>Sexo: ${player.sexo} | Guardião: ${player.guardiao}</p>
+                <p>Nível: ${player.nivel} | Vida: 100/100</p>
+            </div>
+            <button onclick="location.reload()" style="background:gold; color:black;">ENTRAR NO MUNDO</button>
+        `);
     }
 
     iniciar();
