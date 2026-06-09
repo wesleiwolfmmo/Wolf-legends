@@ -1,21 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Wolf Legends Online</title>
+    <meta charset="UTF-8">
+    <title>Wolf Legends: Seleção</title>
     <style>
-        body { margin: 0; background: #1a1a1a; color: white; text-align: center; font-family: sans-serif; }
-        canvas { display: block; margin: 20px auto; background: #000; border: 2px solid #555; }
+        body { background: #1a1a1a; color: #FFD700; text-align: center; font-family: 'Arial', sans-serif; padding: 20px; }
+        .box { border: 3px solid #800080; padding: 20px; border-radius: 15px; display: inline-block; background: #000; }
+        button { background: #800080; color: white; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px; }
+        input { padding: 10px; margin: 10px; }
     </style>
 </head>
 <body>
-    <h1>Wolf Legends Online</h1>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div class="box">
+        <h1>Wolf Legends RPG</h1>
+        <input type="text" id="nome" placeholder="Digite seu nome"><br>
+        
+        <h3>Escolha seu Guardião:</h3>
+        <button onclick="iniciar('Anjo')">Anjo</button>
+        <button onclick="iniciar('Demônio')">Demônio</button>
+
+        <h3>Gênero:</h3>
+        <button onclick="definirGenero('Gay')">🌈 Gay</button>
+        
+        <div id="status" style="margin-top: 20px;"></div>
+    </div>
+
     <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = 'blue';
-        ctx.arc(400, 300, 50, 0, Math.PI * 2);
-        ctx.fill();
+        let jogador = { nome: "", guardiao: "", genero: "", nivel: 1000, ouro: 999999, diamante: 999999 };
+
+        function iniciar(g) {
+            jogador.nome = document.getElementById('nome').value || "Lobo";
+            jogador.guardiao = g;
+            alert("Bem-vindo, " + jogador.nome + "! Você é um " + g + " de elite.");
+        }
+
+        function definirGenero(gen) {
+            jogador.genero = gen;
+            document.getElementById('status').innerHTML = `
+                <h2>Status do Jogador</h2>
+                <p>Nome: ${jogador.nome}</p>
+                <p>Guardião: ${jogador.guardiao}</p>
+                <p>Nível: ${jogador.nivel} | Ouro: ${jogador.ouro} | Diamantes: ${jogador.diamante}</p>
+                <p>Bandeira: 🏳️‍🌈</p>
+                <button style="background:gold; color:black;">Iniciar Aventura</button>
+            `;
+        }
     </script>
 </body>
 </html>
