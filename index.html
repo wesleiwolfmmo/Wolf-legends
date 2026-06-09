@@ -2,58 +2,23 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Wolf Legends Online - Estúdio</title>
     <style>
-        :root { --dark: #020617; --gold: #FFD700; --purple: #800080; }
-        body { background: #000; color: white; font-family: 'Cinzel', sans-serif; display: flex; justify-content: center; padding: 20px; }
-        .box { border: 2px solid var(--purple); padding: 20px; border-radius: 15px; width: 100%; max-width: 400px; background: rgba(0,0,0,0.95); text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
-        .icon-btn { background: #111; border: 2px solid var(--purple); padding: 20px; cursor: pointer; color: var(--gold); border-radius: 10px; }
-        .icon-btn:hover { border-color: var(--gold); }
-        h3 { color: var(--gold); }
-        input { padding: 12px; width: 85%; background: #111; border: 1px solid var(--purple); color: white; margin-bottom: 20px; }
+        body { margin: 0; background: #000; overflow: hidden; font-family: 'Cinzel', sans-serif; }
+        #game-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        #ui-layer { position: relative; z-index: 10; color: gold; text-align: center; padding-top: 50px; }
+        .btn-3d { background: rgba(128,0,128,0.3); border: 2px solid gold; color: white; padding: 20px; cursor: pointer; backdrop-filter: blur(10px); }
     </style>
 </head>
 <body>
-
-<div id="app" class="box">
-    <h1>WOLF LEGENDS</h1>
-    <input type="text" id="nome" placeholder="Digite seu Nome">
-    <h3>Escolha sua Classe:</h3>
-    <div class="grid">
-        <button class="icon-btn" onclick="selecionar('classe', 'Guerreiro')">⚔️<br>Guerreiro</button>
-        <button class="icon-btn" onclick="selecionar('classe', 'Mago')">🔮<br>Mago</button>
-        <button class="icon-btn" onclick="selecionar('classe', 'Arqueiro')">🏹<br>Arqueiro</button>
+    <div id="game-container"></div> <div id="ui-layer">
+        <h1>WOLF LEGENDS 3D</h1>
+        <button class="btn-3d" onclick="iniciar3D()">ENTRAR NO MUNDO 3D</button>
     </div>
-</div>
-
-<script>
-    let player = { nome: "", classe: "", sexo: "", guardiao: "" };
-
-    function selecionar(tipo, valor) {
-        if(tipo === 'classe') {
-            player.nome = document.getElementById('nome').value || "Lobo";
-            player.classe = valor;
-            renderSexo();
+    <script>
+        function iniciar3D() {
+            alert("Preparando motor 3D... (O próximo passo é carregar o Three.js)");
+            // Aqui carregaremos a biblioteca que transforma o jogo em 3D
         }
-    }
-
-    function renderSexo() {
-        document.getElementById('app').innerHTML = `
-            <h3>Gênero:</h3>
-            <div class="grid">
-                <button class="icon-btn" onclick="finalizarSexo('Masculino')">♂️<br>Masc</button>
-                <button class="icon-btn" onclick="finalizarSexo('Feminino')">♀️<br>Fem</button>
-                <button class="icon-btn" onclick="finalizarSexo('Gay 🏳️‍🌈')">🏳️‍🌈<br>Gay</button>
-            </div>
-        `;
-    }
-
-    function finalizarSexo(valor) {
-        player.sexo = valor;
-        // Aqui prosseguiríamos para o Alinhamento (Anjo/Demônio)
-        alert("Classe: " + player.classe + " | Sexo: " + player.sexo);
-    }
-</script>
+    </script>
 </body>
 </html>
