@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wolf Legends Online</title>
+    <style>
+        body { margin: 0; background: #1a1a1a; color: white; text-align: center; font-family: sans-serif; }
+        canvas { display: block; margin: 20px auto; background: #000; border: 2px solid #555; }
+    </style>
+</head>
+<body>
+    <h1>Wolf Legends Online</h1>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'blue';
+        ctx.arc(400, 300, 50, 0, Math.PI * 2);
+        ctx.fill();
+    </script>
+</body>
+</html>
