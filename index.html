@@ -6,291 +6,14 @@
 
 <title>Legend Wolf Online</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
-
-:root{
- --bg:#020617;
- --gold:#FFD700;
- --purple:#800080;
-}
-
-*{
- margin:0;
- padding:0;
- box-sizing:border-box;
-}
-
-body{
- background:linear-gradient(
- 180deg,
- #020617,
- #0f172a
- );
-
- color:white;
- font-family:'Cinzel',serif;
- min-height:100vh;
-
- display:flex;
- justify-content:center;
- align-items:center;
-}
-
-.screen{
- display:none;
- width:95%;
- max-width:900px;
-}
-
-.active{
- display:block;
-}
-
-.card{
-
- background:rgba(255,255,255,.05);
-
- border:1px solid rgba(255,215,0,.2);
-
- border-radius:20px;
-
- padding:30px;
-
- backdrop-filter:blur(10px);
-
- box-shadow:
- 0 0 20px rgba(128,0,128,.2);
-}
-
-h1{
- text-align:center;
- color:var(--gold);
- margin-bottom:20px;
-}
-
-.buttons{
- display:flex;
- gap:15px;
- justify-content:center;
- margin-top:25px;
-}
-
-button{
-
- background:linear-gradient(
- 45deg,
- var(--purple),
- var(--gold)
- );
-
- border:none;
-
- color:white;
-
- padding:12px 25px;
-
- border-radius:10px;
-
- cursor:pointer;
-}
-
-.option-grid{
-
- display:grid;
-
- grid-template-columns:
- repeat(auto-fit,minmax(180px,1fr));
-
- gap:20px;
-}
-
-.option{
-
- border:1px solid #444;
-
- border-radius:15px;
-
- padding:20px;
-
- text-align:center;
-
- cursor:pointer;
-
- transition:.3s;
-}
-
-.option:hover{
-
- transform:scale(1.05);
-
- border-color:gold;
-}
-
-.selected{
-
- border:2px solid gold;
-
- box-shadow:
- 0 0 20px gold;
-}
-
-input{
-
- width:100%;
-
- padding:15px;
-
- border-radius:10px;
-
- border:none;
-
- margin-top:10px;
-}
-
-</style>
-</head>
-
-<body>
-
-<div id="intro" class="screen active">
-
-<div class="card">
-
-<h1>LEGEND WOLF ONLINE</h1>
-
-<p>
-Liberdade ou Tirania?
-O destino é seu.
-</p>
-
-<div class="buttons">
-<button onclick="next('story')">
-Iniciar Jornada
-</button>
-</div>
-
-</div>
-</div>
-
-<div id="story" class="screen">
-
-<div class="card">
-
-<h1>Prólogo</h1>
-
-<p>
-
-O mundo está sob o domínio de tiranos.
-
-O Trono Divino consome a energia da humanidade.
-
-Evolua até o nível 1000.
-
-Desafie o Deus atual.
-
-Decida o destino do mundo.
-
-</p>
-
-<div class="buttons">
-
-<button onclick="back()">
-Voltar
-</button>
-
-<button onclick="next('classe')">
-Continuar
-</button>
-
-</div>
-
-</div>
-</div>
-
-<div id="classe" class="screen">
-
-<div class="card">
-
-<h1>Escolha sua Classe</h1>
-
-<div class="option-grid">
-
-<div class="option"
-onclick="selectOption(this,'classe','Guerreiro')">
-
-⚔️
-<h3>Guerreiro</h3>
-
-</div>
-
-<div class="option"
-onclick="selectOption(this,'classe','Mago')">
-
-🔮
-<h3>Mago</h3>
-
-</div>
-
-<div class="option"
-onclick="selectOption(this,'classe','Arqueiro')">
-
-🏹
-<h3>Arqueiro</h3>
-
-</div>
-
-</div>
-
-<div class="buttons">
-
-<button onclick="back()">Voltar</button>
-
-<button onclick="next('sexo')">
-Continuar
-</button>
-
-</div>
-
-</div>
-</div>
-
-<script>
-
-const stack=[];
-
-const player={
-
- nome:"",
- sexo:"",
- classe:"",
- lado:""
-
-};
-
-function next(id){
-
- document
- .querySelector('.active')
- .classList
- .remove('active');
- <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Legend Wolf Online</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
     --bg:#020617;
-    --purple:#800080;
     --gold:#FFD700;
+    --purple:#800080;
 }
 
 *{
@@ -301,150 +24,203 @@ function next(id){
 
 body{
 
-    height:100vh;
+    min-height:100vh;
+
+    font-family:'Cinzel',serif;
+
+    color:white;
+
+    background:
+    radial-gradient(circle at top,
+    rgba(128,0,128,.35),
+    #020617 65%);
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    overflow:hidden;
+    padding:20px;
 
-    font-family:'Cinzel',serif;
-
-    background:
-    radial-gradient(circle at top,
-    rgba(128,0,128,.35),
-    #020617 60%);
-
-    color:white;
-}
-
-/* brilho do fundo */
-
-body::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:700px;
-    height:700px;
-
-    border-radius:50%;
-
-    background:
-    radial-gradient(
-    circle,
-    rgba(255,215,0,.12),
-    transparent 70%);
-
-    animation:float 8s infinite ease-in-out;
-}
-
-@keyframes float{
-
-    0%{
-        transform:
-        translateY(0px);
-    }
-
-    50%{
-        transform:
-        translateY(-30px);
-    }
-
-    100%{
-        transform:
-        translateY(0px);
-    }
+    transition:0.5s;
 }
 
 .container{
 
-    position:relative;
-    z-index:2;
+    width:100%;
+    max-width:1200px;
 
-    text-align:center;
+    display:grid;
+    grid-template-columns:2fr 1fr;
 
-    width:90%;
-    max-width:900px;
+    gap:25px;
+}
+
+.panel{
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,215,0,.15);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    box-shadow:
+    0 0 30px rgba(128,0,128,.2);
 }
 
 .logo{
 
-    font-size:4rem;
-    font-weight:900;
+    text-align:center;
 
-    color:#FFD700;
+    font-size:3rem;
 
-    text-shadow:
-    0 0 15px rgba(255,215,0,.7),
-    0 0 30px rgba(255,215,0,.4);
+    color:var(--gold);
 
     margin-bottom:20px;
-}
-
-.wolf{
-
-    color:#c084fc;
 
     text-shadow:
-    0 0 20px rgba(192,132,252,.8);
+    0 0 20px gold;
 }
 
-.subtitle{
+.section-title{
 
-    font-size:1.1rem;
+    color:var(--gold);
 
-    line-height:1.8;
-
-    max-width:700px;
-
-    margin:auto auto 40px auto;
-
-    color:#d4d4d8;
+    margin-top:20px;
+    margin-bottom:10px;
 }
 
-.btn{
+.grid{
 
-    background:
-    linear-gradient(
-    45deg,
-    #800080,
-    #FFD700);
+    display:grid;
 
-    border:none;
+    grid-template-columns:
+    repeat(auto-fit,minmax(150px,1fr));
 
-    color:white;
+    gap:15px;
+}
 
-    padding:18px 50px;
+.card{
 
-    font-size:1.2rem;
+    background:rgba(255,255,255,.04);
 
-    border-radius:50px;
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:15px;
+
+    padding:15px;
+
+    text-align:center;
 
     cursor:pointer;
 
     transition:.3s;
 }
 
-.btn:hover{
+.card:hover{
 
-    transform:
-    scale(1.05);
+    transform:translateY(-4px);
 
-    box-shadow:
-    0 0 25px rgba(255,215,0,.5),
-    0 0 40px rgba(128,0,128,.4);
+    border-color:gold;
 }
 
-.version{
+.selected{
+
+    border:2px solid gold;
+
+    box-shadow:
+    0 0 20px gold,
+    0 0 40px rgba(128,0,128,.4);
+
+    transform:scale(1.04);
+}
+
+.weapon{
+
+    font-size:70px;
+
+    margin-bottom:10px;
+}
+
+.side{
+
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.summary{
+
+    line-height:2;
+}
+
+.btns{
+
+    display:flex;
+    gap:15px;
 
     margin-top:25px;
+}
 
-    opacity:.6;
+button{
 
-    font-size:.8rem;
+    flex:1;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+    color:white;
+
+    transition:.3s;
+}
+
+.back{
+
+    background:#374151;
+}
+
+.start{
+
+    background:
+    linear-gradient(
+    45deg,
+    #800080,
+    #FFD700
+    );
+}
+
+.start:disabled{
+
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+.checkbox{
+
+    margin-top:15px;
+    font-size:1.1rem;
+}
+
+@media(max-width:900px){
+
+    .container{
+
+        grid-template-columns:1fr;
+    }
+
+    .logo{
+        font-size:2rem;
+    }
 }
 
 </style>
@@ -453,102 +229,260 @@ body::before{
 
 <div class="container">
 
-    <h1 class="logo">
-        LEGEND <span class="wolf">WOLF</span> ONLINE
-    </h1>
+<div class="panel">
 
-    <p class="subtitle">
+<h1 class="logo">
+🐺 LEGEND WOLF ONLINE
+</h1>
 
-        O mundo está sob o domínio de tiranos que criam o caos para serem adorados.
+<h2 class="section-title">
+SEXO
+</h2>
 
-        O Trono Divino consome a energia da humanidade.
+<div class="grid">
 
-        Evolua, torne-se mais forte e alcance o Nível 1000.
+<div class="card sexo"
+onclick="selectCard(this,'sexo','Masculino')">
+♂
+<h3>Masculino</h3>
+</div>
 
-        Desafie o Deus atual e decida o destino do mundo:
+<div class="card sexo"
+onclick="selectCard(this,'sexo','Feminino')">
+♀
+<h3>Feminino</h3>
+</div>
 
-        <strong>Liberdade ou Tirania.</strong>
+</div>
 
-    </p>
+<h2 class="section-title">
+CLASSE
+</h2>
 
-    <button class="btn" onclick="iniciar()">
+<div class="grid">
 
-        INICIAR JORNADA
+<div class="card classe"
+onclick="selectCard(this,'classe','Guerreiro')">
 
-    </button>
+<div class="weapon">⚔️</div>
 
-    <div class="version">
+<h3>Guerreiro</h3>
 
-        Legend Wolf Online • Alpha 0.1
+<p>Força e Defesa</p>
 
-    </div>
+</div>
+
+<div class="card classe"
+onclick="selectCard(this,'classe','Mago')">
+
+<div class="weapon">🔮</div>
+
+<h3>Mago</h3>
+
+<p>Poder Arcano</p>
+
+</div>
+
+<div class="card classe"
+onclick="selectCard(this,'classe','Arqueiro')">
+
+<div class="weapon">🏹</div>
+
+<h3>Arqueiro</h3>
+
+<p>Precisão Mortal</p>
+
+</div>
+
+</div>
+
+<h2 class="section-title">
+IDENTIDADE
+</h2>
+
+<label class="checkbox">
+
+<input
+type="checkbox"
+id="flag">
+
+🏳️‍🌈 Exibir bandeira no perfil
+
+</label>
+
+<h2 class="section-title">
+DESTINO
+</h2>
+
+<div class="grid">
+
+<div class="card destino"
+onclick="selectDestino(this,'Luz')">
+
+☀️
+
+<h3>Luz</h3>
+
+</div>
+
+<div class="card destino"
+onclick="selectDestino(this,'Escuridão')">
+
+🌑
+
+<h3>Escuridão</h3>
+
+</div>
+
+</div>
+
+<div class="btns">
+
+<button class="back"
+onclick="history.back()">
+
+⬅ Voltar
+
+</button>
+
+<button
+id="startBtn"
+class="start"
+disabled>
+
+⚔️ Iniciar Jogo
+
+</button>
+
+</div>
+
+</div>
+
+<div class="panel side">
+
+<h2 style="color:gold">
+HERÓI
+</h2>
+
+<div class="summary">
+
+<p><strong>Sexo:</strong>
+<span id="sSexo">-</span></p>
+
+<p><strong>Classe:</strong>
+<span id="sClasse">-</span></p>
+
+<p><strong>Destino:</strong>
+<span id="sDestino">-</span></p>
+
+<p><strong>Tag:</strong>
+<span id="sFlag">Não</span></p>
+
+</div>
+
+<p style="opacity:.8">
+
+Liberdade ou Tirania?
+
+O destino do mundo será decidido por você.
+
+</p>
+
+</div>
 
 </div>
 
 <script>
 
-function iniciar(){
+const player={
+    sexo:'',
+    classe:'',
+    destino:'',
+    flag:false
+};
 
-    alert(
-        "Próxima tela: Prólogo"
+function selectCard(el,tipo,valor){
+
+    document
+    .querySelectorAll('.'+tipo)
+    .forEach(c=>c.classList.remove('selected'));
+
+    el.classList.add('selected');
+
+    player[tipo]=valor;
+
+    update();
+}
+
+function selectDestino(el,valor){
+
+    document
+    .querySelectorAll('.destino')
+    .forEach(c=>c.classList.remove('selected'));
+
+    el.classList.add('selected');
+
+    player.destino=valor;
+
+    if(valor==='Luz'){
+
+        document.body.style.background=
+        'radial-gradient(circle at top, rgba(255,215,0,.25), #020617 65%)';
+
+    }else{
+
+        document.body.style.background=
+        'radial-gradient(circle at top, rgba(128,0,128,.35), #020617 65%)';
+
+    }
+
+    update();
+}
+
+document
+.getElementById('flag')
+.addEventListener('change',e=>{
+
+    player.flag=e.target.checked;
+
+    update();
+});
+
+function update(){
+
+    sSexo.textContent=
+    player.sexo || '-';
+
+    sClasse.textContent=
+    player.classe || '-';
+
+    sDestino.textContent=
+    player.destino || '-';
+
+    sFlag.textContent=
+    player.flag ? '🏳️‍🌈' : 'Não';
+
+    startBtn.disabled = !(
+        player.sexo &&
+        player.classe &&
+        player.destino
     );
 
+    localStorage.setItem(
+        'legendWolfCharacter',
+        JSON.stringify(player)
+    );
 }
 
-</script>
+document
+.getElementById('startBtn')
+.addEventListener('click',()=>{
 
-</body>
-</html>
+    alert(
+        'Personagem criado com sucesso!'
+    );
 
- stack.push(id);
-
- document
- .getElementById(id)
- .classList
- .add('active');
-}
-
-function back(){
-
- if(stack.length<2)return;
-
- stack.pop();
-
- let previous=
- stack[stack.length-1];
-
- document
- .querySelector('.active')
- .classList
- .remove('active');
-
- document
- .getElementById(previous)
- .classList
- .add('active');
-}
-
-function selectOption(
- element,
- field,
- value
-){
-
- element.parentElement
- .querySelectorAll('.option')
- .forEach(
- e=>e.classList.remove('selected')
- );
-
- element.classList.add('selected');
-
- player[field]=value;
-
- localStorage.setItem(
- 'legendWolfPlayer',
- JSON.stringify(player)
- );
-}
+});
 
 </script>
 
