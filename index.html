@@ -2,80 +2,58 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Wolf Legends Online - Setup</title>
+    <title>Wolf Legends Online - Estúdio</title>
     <style>
         :root { --dark: #020617; --gold: #FFD700; --purple: #800080; }
-        body { background: radial-gradient(circle, #1a0033, #000); color: white; font-family: 'Cinzel', sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .box { border: 2px solid var(--purple); padding: 30px; background: rgba(0,0,0,0.9); border-radius: 20px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 0 15px purple; }
-        h1 { color: var(--gold); text-shadow: 0 0 10px purple; }
-        button { background: linear-gradient(to bottom, #800080, #2a004a); color: white; border: 1px solid var(--gold); padding: 15px; margin: 8px 0; cursor: pointer; border-radius: 8px; width: 100%; font-weight: bold; }
-        .back-btn { background: #333; width: 60px; padding: 5px; font-size: 10px; }
-        input { padding: 12px; width: 90%; background: #111; color: var(--gold); border: 1px solid var(--purple); border-radius: 5px; margin-bottom: 20px; }
-        .stats-bar { color: var(--gold); font-size: 14px; margin-top: 10px; }
+        body { background: #000; color: white; font-family: 'Cinzel', sans-serif; display: flex; justify-content: center; padding: 20px; }
+        .box { border: 2px solid var(--purple); padding: 20px; border-radius: 15px; width: 100%; max-width: 400px; background: rgba(0,0,0,0.95); text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+        .icon-btn { background: #111; border: 2px solid var(--purple); padding: 20px; cursor: pointer; color: var(--gold); border-radius: 10px; }
+        .icon-btn:hover { border-color: var(--gold); }
+        h3 { color: var(--gold); }
+        input { padding: 12px; width: 85%; background: #111; border: 1px solid var(--purple); color: white; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
-<div id="app" class="box"></div>
+<div id="app" class="box">
+    <h1>WOLF LEGENDS</h1>
+    <input type="text" id="nome" placeholder="Digite seu Nome">
+    <h3>Escolha sua Classe:</h3>
+    <div class="grid">
+        <button class="icon-btn" onclick="selecionar('classe', 'Guerreiro')">⚔️<br>Guerreiro</button>
+        <button class="icon-btn" onclick="selecionar('classe', 'Mago')">🔮<br>Mago</button>
+        <button class="icon-btn" onclick="selecionar('classe', 'Arqueiro')">🏹<br>Arqueiro</button>
+    </div>
+</div>
 
 <script>
-    let player = { nome: "", classe: "", sexo: "", guardiao: "", nivel: 1000, vida: 100, mana: 100 };
-    let history = [];
+    let player = { nome: "", classe: "", sexo: "", guardiao: "" };
 
-    function render(html, saveHistory = true) {
-        if(saveHistory) history.push(app.innerHTML);
-        document.getElementById('app').innerHTML = html;
-    }
-
-    function voltar() { if(history.length > 0) document.getElementById('app').innerHTML = history.pop(); }
-
-    function iniciar() {
-        render(`
-            <h1>WOLF LEGENDS</h1>
-            <input type="text" id="nome" placeholder="Nome do Herói">
-            <h3>Escolha sua Classe:</h3>
-            <button onclick="definir('classe', 'Guerreiro')">Guerreiro</button>
-            <button onclick="definir('classe', 'Mago')">Mago</button>
-            <button onclick="definir('classe', 'Arqueiro')">Arqueiro</button>
-        `, false);
-    }
-
-    function definir(key, val) {
-        if(key === 'classe') {
+    function selecionar(tipo, valor) {
+        if(tipo === 'classe') {
             player.nome = document.getElementById('nome').value || "Lobo";
-            player.classe = val;
-            render(`
-                <button class="back-btn" onclick="voltar()">VOLTAR</button>
-                <h3>Gênero:</h3>
-                <button onclick="definir('sexo', 'Masculino')">Masculino</button>
-                <button onclick="definir('sexo', 'Feminino')">Feminino</button>
-                <button onclick="definir('sexo', 'Gay 🏳️‍🌈')">Gay 🏳️‍🌈</button>
-            `);
-        } else if(key === 'sexo') {
-            player.sexo = val;
-            render(`
-                <button class="back-btn" onclick="voltar()">VOLTAR</button>
-                <h3>Escolha seu Guardião:</h3>
-                <button onclick="finalizar('Anjo')">Anjo (Luz)</button>
-                <button onclick="finalizar('Demônio')">Demônio (Sombras)</button>
-            `);
+            player.classe = valor;
+            renderSexo();
         }
     }
 
-    function finalizar(g) {
-        player.guardiao = g;
-        render(`
-            <h2>STATUS INICIAL</h2>
-            <div class="stats-bar">
-                <p>Nome: ${player.nome} | Classe: ${player.classe}</p>
-                <p>Sexo: ${player.sexo} | Guardião: ${player.guardiao}</p>
-                <p>Nível: ${player.nivel} | Vida: 100/100</p>
+    function renderSexo() {
+        document.getElementById('app').innerHTML = `
+            <h3>Gênero:</h3>
+            <div class="grid">
+                <button class="icon-btn" onclick="finalizarSexo('Masculino')">♂️<br>Masc</button>
+                <button class="icon-btn" onclick="finalizarSexo('Feminino')">♀️<br>Fem</button>
+                <button class="icon-btn" onclick="finalizarSexo('Gay 🏳️‍🌈')">🏳️‍🌈<br>Gay</button>
             </div>
-            <button onclick="location.reload()" style="background:gold; color:black;">ENTRAR NO MUNDO</button>
-        `);
+        `;
     }
 
-    iniciar();
+    function finalizarSexo(valor) {
+        player.sexo = valor;
+        // Aqui prosseguiríamos para o Alinhamento (Anjo/Demônio)
+        alert("Classe: " + player.classe + " | Sexo: " + player.sexo);
+    }
 </script>
 </body>
 </html>
