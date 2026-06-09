@@ -275,6 +275,230 @@ function next(id){
  .querySelector('.active')
  .classList
  .remove('active');
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Legend Wolf Online</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#020617;
+    --purple:#800080;
+    --gold:#FFD700;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+    font-family:'Cinzel',serif;
+
+    background:
+    radial-gradient(circle at top,
+    rgba(128,0,128,.35),
+    #020617 60%);
+
+    color:white;
+}
+
+/* brilho do fundo */
+
+body::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+    height:700px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+    circle,
+    rgba(255,215,0,.12),
+    transparent 70%);
+
+    animation:float 8s infinite ease-in-out;
+}
+
+@keyframes float{
+
+    0%{
+        transform:
+        translateY(0px);
+    }
+
+    50%{
+        transform:
+        translateY(-30px);
+    }
+
+    100%{
+        transform:
+        translateY(0px);
+    }
+}
+
+.container{
+
+    position:relative;
+    z-index:2;
+
+    text-align:center;
+
+    width:90%;
+    max-width:900px;
+}
+
+.logo{
+
+    font-size:4rem;
+    font-weight:900;
+
+    color:#FFD700;
+
+    text-shadow:
+    0 0 15px rgba(255,215,0,.7),
+    0 0 30px rgba(255,215,0,.4);
+
+    margin-bottom:20px;
+}
+
+.wolf{
+
+    color:#c084fc;
+
+    text-shadow:
+    0 0 20px rgba(192,132,252,.8);
+}
+
+.subtitle{
+
+    font-size:1.1rem;
+
+    line-height:1.8;
+
+    max-width:700px;
+
+    margin:auto auto 40px auto;
+
+    color:#d4d4d8;
+}
+
+.btn{
+
+    background:
+    linear-gradient(
+    45deg,
+    #800080,
+    #FFD700);
+
+    border:none;
+
+    color:white;
+
+    padding:18px 50px;
+
+    font-size:1.2rem;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.btn:hover{
+
+    transform:
+    scale(1.05);
+
+    box-shadow:
+    0 0 25px rgba(255,215,0,.5),
+    0 0 40px rgba(128,0,128,.4);
+}
+
+.version{
+
+    margin-top:25px;
+
+    opacity:.6;
+
+    font-size:.8rem;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1 class="logo">
+        LEGEND <span class="wolf">WOLF</span> ONLINE
+    </h1>
+
+    <p class="subtitle">
+
+        O mundo está sob o domínio de tiranos que criam o caos para serem adorados.
+
+        O Trono Divino consome a energia da humanidade.
+
+        Evolua, torne-se mais forte e alcance o Nível 1000.
+
+        Desafie o Deus atual e decida o destino do mundo:
+
+        <strong>Liberdade ou Tirania.</strong>
+
+    </p>
+
+    <button class="btn" onclick="iniciar()">
+
+        INICIAR JORNADA
+
+    </button>
+
+    <div class="version">
+
+        Legend Wolf Online • Alpha 0.1
+
+    </div>
+
+</div>
+
+<script>
+
+function iniciar(){
+
+    alert(
+        "Próxima tela: Prólogo"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
 
  stack.push(id);
 
